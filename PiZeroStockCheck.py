@@ -29,7 +29,7 @@ def CheckStock(url, name):
 	else:
 		print name
 		print "...............Price:",price
-		print "...............Stock:",stock
+		print "...............Stock:",stock.capitalize()
 
 
 def Check(interval):
