@@ -11,18 +11,14 @@ def CheckStock(url, name):
 	soup = BeautifulSoup(ourUrl, "html.parser")
 	title = soup.title.text
 	body = soup.find_all('span')	   #Searches for text
-	#tag_stk = soup.find(id="prod-stock").findNext(id="prod-stock").next_element #Find second item with id and set value to its next element.
 
 	nums=[]
 	if body:									#If the text is found on the page, do stuff.
 		print name
-		#print body.findNext('class="balls"')
 		for child in body:
 			number = child.string
 			if len(number) <= 2:
 				nums.append(number)
-		#print body.span.next
-		#print body.span.findNext("span").next
 	else:
 		print "Not found..."
 		
@@ -68,8 +64,6 @@ def CheckTicket(ls1, ls2):
 		NumMatch = len(set(ls1).intersection(ls2))
 		if NumMatch == 6:
 			print "JACKPOT!!"
-		#else:
-		#	print "Ordered matches!", set(ls1).intersection(ls2)
 		NoMatches = 0
 	
 	WinRed = ls1.pop()
