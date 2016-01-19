@@ -51,12 +51,14 @@ def CalcValue(nWhite,nRed):
 		Winnings = "Jackpot"
 
 	print "Winnings is $" + str(Winnings)
+	return Winnings
 	
 def CheckTicket(ls1, ls2):
 	NoMatches = 1
 	NumWhite = 0
 	NumRed = 0
 	ls1 = map(int, ls1)				#Force all values to integer (removing HTML formatting)
+	ls2 = map(int, ls2)	
 	print "My ticket : " + str(ls2)
 	print "Win ticket: " + str(ls1)
 	
@@ -82,30 +84,25 @@ def CheckTicket(ls1, ls2):
 	if NoMatches:
 		print "No matches found"
 		
-	CalcValue(NumWhite, NumRed)
+	return CalcValue(NumWhite, NumRed)
 	
-def Check(interval):
+def Check():
 	url = ('http://www.powerball.com/')
 	name = "Powerball".ljust(15)
 	winning_nums = CheckStock(url,name)
-	MyTicket1 = [1,5,16,17,20,20]
-	MyTicket2 = [8,16,30,50,60,10]
-	MyTicket3 = [2,9,20,35,38,16]
-	MyTicket4 = [5,30,38,61,69,16]
-	MyTicket5 = [3,4,6,34,65,21]
+	MyWinnings = 0
+	MyTickCount = 0
 	
-	print "\n\nChecking ticket: 1"
-	CheckTicket(ls1 = winning_nums, ls2 = MyTicket1)	
-	print "\n\nChecking ticket: 2"
-	CheckTicket(ls1 = winning_nums, ls2 = MyTicket2)	
-	print "\n\nChecking ticket: 3"
-	CheckTicket(ls1 = winning_nums, ls2 = MyTicket3)	
-	print "\n\nChecking ticket: 4"
-	CheckTicket(ls1 = winning_nums, ls2 = MyTicket4)	
-	print "\n\nChecking ticket: 5"
-	CheckTicket(ls1 = winning_nums, ls2 = MyTicket5)
+	while True:
+		mytick = raw_input('Enter ticket numbers separated by spaces or "q" to quit: ')
+		if mytick is 'q' or mytick == '':
+			break		
+		MyTicket = mytick.split()
+		
+		print "\n\nChecking ticket: "
+		TickWinnings = CheckTicket(ls1 = winning_nums, ls2 = MyTicket)	
+		MyTickCount += 1;
+		MyWinnings += TickWinnings 
+	print "In %d tickets, winnings are: $%d" %(MyTickCount, MyWinnings)
 
-	
-	#threading.Timer(interval,Check).start()
-
-Check(120)	
+Check()	
