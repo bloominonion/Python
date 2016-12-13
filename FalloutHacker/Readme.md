@@ -1,8 +1,8 @@
+#Fallout Hacker
+###**Built using Python 3.5**
 This is a tool to hack the terminals in Fallout 4
 
 There are versions with and without a gui(using tkinter)
-
-**Built using Python 3.5**
 
 For Gui version, click the word that is a dud to remove it, or enter it in the shell version.
 Once an item is picked, select the likeness returned by the Fallout game. It will automatically remove the subsequent invalid choices.
