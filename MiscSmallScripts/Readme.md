@@ -1,0 +1,3 @@
+Area to store small scripts that have no rhyme or reason...
+
+Most all of the scripts are simple tests or things done just because.
