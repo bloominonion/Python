@@ -143,6 +143,9 @@ def EvalListByLikeness(likeness,guess,p):
     global list
     global prevGuesses
 
+    if likeness == "":
+        print ("Setting %s as DUD" %guess)
+        optList = [x for x in optList if x != guess]
     try:
         likeness = int(likeness)
     except ValueError:
@@ -184,13 +187,16 @@ def CheckInput():
         errString.append("INPUT ERROR: Too few entries found in list: %s" %list)
         errors+=1
     modeItem = Counter(list)
-    mode = modeItem.most_common(1)
-    mode = len(mode[0][0])
+    modeF = modeItem.most_common(1)
+    mode = len(modeF[0][0])
     lenLast=0
     for item in list:
         if len(item) < mode:
             errors += 1
             errString.append("LENGTH ERROR: Item %s too short." %item)
+        elif len(item) > mode:
+            errors += 1
+            errString.append("LENGTH ERROR: Item %s too long.\n" %item)
         elif len(item) < lenLast and lenLast != 0:
             errors += 1
             errString.append("LENGTH ERROR: Item %s didn't match last entry." %item)
@@ -228,15 +234,18 @@ def LoadLast(E):
     except:
         print ("No data...")
 
-def SaveEntry(line):
+def SaveEntry(inputStr):
     global spec
-    with open(spec,'a+') as data:
-        lines = data.readlines()
-        try:
-            last_line = lines[-1].rstrip()
-        except:
-            last_line = None
-        if line not in lines:
-            data.write(line + "\n")
+    entry = ' '.join(val for val in inputStr)
+    if os.path.exists(spec):
+        entry = entry.strip()
+        with open(spec,'r+') as data:
+            lines = data.read().splitlines()
+            if lines:
+                if entry not in lines:
+                    data.seek(0,2)
+                    data.write(entry + "\n")
+    else:
+        print ("Unable to open spec.")
 
 mainPanel()

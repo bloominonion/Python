@@ -1,5 +1,4 @@
-from collections import Counter
-from collections import OrderedDict
+from collections import Counter, OrderedDict, defaultdict
 import os
 import re
 
@@ -37,7 +36,6 @@ def ProcessInput(string):
         return False
 
 def GuessThePassword(options):
-    from collections import defaultdict
     ranking = defaultdict(dict)
     for str in options:
         ind = 0
@@ -79,9 +77,9 @@ def EvalListByLikeness(optList, likeness,guess):
         try:
             likeness = int(likeness)
         except ValueError:
-            guess = guess.upper()
-            print ("Setting %s as DUD" %guess)
-            optList = [x for x in optList if x != guess]
+            likeness = likeness.upper()
+            print ("Setting %s as DUD" %likeness)
+            optList = [x for x in optList if x != likeness]
             return optList, True, ""
 
     prevGuesses.append([guess,likeness])
