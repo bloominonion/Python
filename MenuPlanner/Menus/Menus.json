@@ -1,0 +1,41 @@
+{
+   "Noodley Chicken" : {
+      "recipeName":"Noodley Chicken",
+      "ingredients":[
+         {
+            "item" : "Chicken",
+            "qty": "2",
+            "qty_type" : "Breast"
+         },
+         {
+            "item" : "Franks Red Hot Sauce",
+            "qty": "4",
+            "qty_type" : "Tbsp"
+         },
+         {
+            "item" : "Pasta Roni Noodles",
+            "qty": "1",
+            "qty_type" : "Pkg"
+         },
+         {
+            "item" : "Panko Bread Crumbs",
+            "qty": "0.5",
+            "qty_type" : "Cup"
+         },
+         {
+            "item" : "Seasoning",
+            "qty": "2",
+            "qty_type" : "Tbsp"
+         },
+         {
+            "item" : "Vegetable Side",
+            "qty": "1",
+            "qty_type" : "Pkg"
+         }
+      ],
+      "recipe":"Bread chicken with break crumbs and seasoning. Cook on skillet. Serve with noodles."
+   },
+   "Korean Barbeque Beef":{},
+   "Spaghetti and Meatballs":{},
+   "Buffalo Chicken":{}
+}
