@@ -23,7 +23,7 @@ def main(E):
 
     list = ListFromString(str)
     if CheckInput():
-        SaveEntry(str)
+        SaveEntry(list)
     GuessThePassword()
     global reguess
     reguess = False
