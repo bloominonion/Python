@@ -23,7 +23,7 @@
             "qty_type" : "Cup"
          },
          {
-            "item" : "Seasoning",
+            "item" : "Meat Seasoning",
             "qty": "2",
             "qty_type" : "Tbsp"
          },
@@ -35,7 +35,54 @@
       ],
       "recipe":"Bread chicken with break crumbs and seasoning. Cook on skillet. Serve with noodles."
    },
-   "Korean Barbeque Beef":{},
-   "Spaghetti and Meatballs":{},
-   "Buffalo Chicken":{}
+   "Korean Barbeque Beef":{
+      "recipeName":"Korean Barbeque Beef",
+      "ingredients":[
+         {
+            "item":"Roast",
+            "qty":"1",
+            "qty_type":"Pkg"
+         }
+      ]
+      },
+   "Spaghetti and Meatballs":{
+      "recipeName":"Spaghetti and Meatballs",
+      "ingredients":[
+         {
+            "item" : "Spaghetti",
+            "qty": "0.5",
+            "qty_type" : "Box"
+         },
+         {
+            "item" : "Ground Beef",
+            "qty": "0.5",
+            "qty_type" : "Pound"
+         }
+      ]
+      },
+   "Buffalo Chicken":{
+      "recipeName":"Buffalo Chicken",
+      "ingredients":[
+         {
+            "item" : "Chicken",
+            "qty": "2",
+            "qty_type" : "Breast"
+         },
+         {
+            "item" : "Franks Red Hot Sauce",
+            "qty": "0.5",
+            "qty_type" : "Cup"
+         },
+         {
+            "item" : "Ranch",
+            "qty": "0.25",
+            "qty_type" : "Cup"
+         },
+         {
+            "item" : "Shredded Cheddar",
+            "qty": "1",
+            "qty_type" : "Cup"
+         }
+      ]
+   }
 }
