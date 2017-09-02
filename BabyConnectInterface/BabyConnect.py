@@ -1,29 +1,24 @@
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from datetime import datetime, timedelta
+import platform
+import time
 import sys
 import os
 
-# Validate we have a driver available
-dir_path = os.path.dirname(os.path.realpath(__file__))
-sys.path.append(dir_path)
-if not os.path.isfile(dir_path + "\\chromedriver.exe"):
-    print ("Unable to locate chrome driver. Please download from: https://sites.google.com/a/chromium.org/chromedriver/downloads")
-    exit()
-
 def main():
-    # import Authorization
-    # con = WebInterface(user=Authorization.GetUser(), password=Authorization.GetPassword())
-    # con.LogDiaper("dirty and wet")
-    # sess = Nursing(0,500,500)
-    # con.LogNursing(sess)
-    import time
-    from pprint import pprint
-    testNurse = Nursing(1)
-    time.sleep(3)
-    testNurse.Switch()
-    time.sleep(1)
-    pprint(testNurse.GetTimes())
+    import Authorization
+    with WebInterface(user=Authorization.GetUser(), password=Authorization.GetPassword()) as con:
+        con.LogDiaper("dirty and wet")
+        sess = Nursing(0,500,500)
+        con.LogNursing(sess)
+##    import time
+##    from pprint import pprint
+##    testNurse = Nursing(1)
+##    time.sleep(3)
+##    testNurse.Switch()
+##    time.sleep(1)
+##    pprint(testNurse.GetTimes())
 
 class WebInterface(object):
     url = r"https://www.baby-connect.com/home"
@@ -39,7 +34,10 @@ class WebInterface(object):
         self.user = user
         self.password = password
 
-        self.driver = webdriver.Chrome()
+        if platform.system() == 'Linux':
+            self.driver = webdriver.Firefox()
+        else:
+            self.driver = webdriver.Chrome()
         self.driver.get(self.url)
         elem = self.driver.find_element_by_name("email")
         elem.clear()
@@ -47,10 +45,23 @@ class WebInterface(object):
         elem = self.driver.find_element_by_name("pass")
         elem.send_keys(password)
         elem.send_keys(Keys.RETURN)
-        assert "logout" in self.driver.page_source
+        timeCycles = 0
+        timeWait = 2
+        while "logout" not in self.driver.page_source:
+            if timeCycles > 5:
+                break
+            time.sleep(timeWait)
+            timeCycles += 1
 
-    def __del__(self):
+    def __enter__(self):
+        return self
+
+    def __exit__(self, exc_type, exc_value, traceback):
         self.driver.close()
+        
+    def __del__(self):
+        print ("Finalizing session")
+        print (self.driver.close())
 
     def LogDiaper(self, logType):
         logType = str(logType)
@@ -71,6 +82,7 @@ class WebInterface(object):
 
         # Fire pop-up box for logging
         self.driver.find_element_by_partial_link_text("Diaper").click()
+        time.sleep(1)
 
         # Set type of diaper and log it.
         self.driver.find_element_by_id(self.ids[diaperType]).click()
@@ -80,6 +92,7 @@ class WebInterface(object):
     def LogNursing(self, nursing):
         data = nursing.GetTimes()
         self.driver.find_element_by_partial_link_text("Nursing").click()
+        time.sleep(1)
         elem = self.driver.find_element_by_id("timeinput")
         elem.clear()
         elem.send_keys(data['start'])
